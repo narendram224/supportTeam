@@ -8,7 +8,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ApiService } from './services/api.service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { HttpClientModule } from '@angular/common/http';
-
+// import { NgxSpinnerModule } from "ngx-spinner";
+import {SelfBuildingSquareSpinnerModule,SemipolarSpinnerModule,SpringSpinnerModule} from 'angular-epic-spinners'
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,
-    AppRoutingModule,HttpClientModule,FormsModule
+    AppRoutingModule,HttpClientModule,FormsModule,SelfBuildingSquareSpinnerModule,SemipolarSpinnerModule
+    ,SpringSpinnerModule
   ],
   providers: [ApiService,DashboardService],
   bootstrap: [AppComponent]

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators'
 import { throwError } from 'rxjs';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
-  url = "http://msil.us-east-2.elasticbeanstalk.com";
+  url = "http://192.168.1.43:8000";
   header: HttpHeaders;
   constructor(private http: HttpClient) { }
 
@@ -90,4 +90,16 @@ export class ApiService {
       console.log(message);
       
   }
+
+  // showSpinner(){
+  //   this.spinner.show("please wait", {
+  //     type: "line-scale-party",
+  //     size: "large",
+  //     bdColor: "rgba(100,149,237, .8)",
+  //     color: "white"
+  //   });
+  // }
+  // hideSpinner(){
+  //   this.spinner.hide("please wait")
+  // }
 }

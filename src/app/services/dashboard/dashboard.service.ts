@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
+import { HttpClient } from '@angular/common/http';
+import { Dashboard } from 'src/app/component/dashboard/dashboard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-  constructor(private api:ApiService) { }
+    url= "http://192.168.1.43:8000"
+  constructor(private api:ApiService,private http:HttpClient) { }
 
   updateDashboard(body:any,id:number){
     return this.api.put(`users/${id}`, body);
@@ -15,4 +18,14 @@ export class DashboardService {
   getDashboardData(){
     return this.api.get(`incidents`);
   }
+
+  RemarkPut(id,body:Dashboard){
+    return this.api.put(`incidents/${id}`,body);
+  }
+  // showspinner(){
+  //   this.api.showSpinner();
+  // }
+  // hidespinner(){
+  //   this.api.hideSpinner();
+  // }
 }
