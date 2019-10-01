@@ -22,6 +22,10 @@ export class DashboardService {
   RemarkPut(id,body:Dashboard){
     return this.api.put(`incidents/${id}`,body);
   }
+
+  downloadCSV(){
+    return this.api.get('incidents/excel');
+  }
   // showspinner(){
   //   this.api.showSpinner();
   // }

@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardApi:DashboardService) { }
   ngOnInit() {
     this.dashboardApi.getDashboardData().subscribe((Incidences)=>{
-        this.incidences = Incidences;
+         this.incidences = Incidences;
        this.newarr = this.incidences;  
     });
     setTimeout(() => {
@@ -64,5 +64,11 @@ filter(heroes:string){
      this.incidences = heroesnew;   
  }
 }
+downloadFile(data: any){
+  var blob = new Blob([data], { type: 'text/csv' });
+  var url= window.URL.createObjectURL(blob);
+  window.open(url);
+}
+
 
 }

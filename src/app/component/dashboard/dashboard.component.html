@@ -7,7 +7,18 @@
 ></app-self-building-square-spinner>
 
 </div>
-  <div class="row" *ngIf="!spinner">
+<div *ngIf="!spinner && !incidences.length"><div class="error-header"> 
+</div> 
+<div class="container "> 
+ <section class="error-container text-center"> 
+  <h1>404</h1> 
+  <div class="error-divider"> 
+   <h2>PAGE NOT FOUND.</h2> 
+   <p class="description">We Couldn't Find This Page</p> 
+  </div> 
+ </section> 
+</div> </div>
+  <div class="row" *ngIf="!spinner && incidences.length">
     <div class="col">
         <div class="card m-2"  >
             <div class="card-header text-center mb-1">
@@ -25,6 +36,8 @@
                     <option value="Other" >Other</option>
               
                 </select>
+                <a  href="http://192.168.1.43:8000/incidents/excel">
+                 <button class="btn btn-success">DownloadCSV</button> </a>
                     </div>
                 </div>
             
