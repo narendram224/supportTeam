@@ -69,6 +69,4 @@ downloadFile(data: any){
   var url= window.URL.createObjectURL(blob);
   window.open(url);
 }
-
-
 }
