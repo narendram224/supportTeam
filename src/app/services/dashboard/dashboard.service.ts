@@ -16,15 +16,15 @@ export class DashboardService {
   }
 
   getDashboardData(){
-    return this.api.get(`incidents`);
+    return this.api.get(`incidents/support/all`);
   }
 
   RemarkPut(id,body:Dashboard){
-    return this.api.put(`incidents/${id}`,body);
+    return this.api.put(`incidents/v1/${id}`,body);
   }
 
   downloadCSV(){
-    return this.api.get('incidents/excel');
+    return this.api.get('incidents/support/all/excel');
   }
   // showspinner(){
   //   this.api.showSpinner();

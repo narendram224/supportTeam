@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import {Dashboard} from './dashboard';
 import { ThrowStmt } from '@angular/compiler';
+import { AuthService } from 'src/app/services/auth/auth.service';
 // import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -16,9 +17,13 @@ export class DashboardComponent implements OnInit {
   errorData:string;
   selectedIncident:Dashboard;
   incidences:Dashboard[]=[];
+  token:string;
 
-  constructor(private dashboardApi:DashboardService) { }
+  constructor(private dashboardApi:DashboardService,private auth:AuthService) { }
   ngOnInit() {
+     this.token = `bearer ${this.auth.getToken()}`;
+     console.log(this.token);
+     
     this.dashboardApi.getDashboardData().subscribe((Incidences)=>{
          this.incidences = Incidences;
        this.newarr = this.incidences;  
@@ -38,7 +43,7 @@ export class DashboardComponent implements OnInit {
     delete remarkBody.incidentID;
     delete remarkBody.reportDateTimeStr;
     this.spinner1 = true;
-    this.dashboardApi.RemarkPut(1,remarkBody).subscribe((res)=>{
+    this.dashboardApi.RemarkPut(this.selectedIncident.incidentID,remarkBody).subscribe((res)=>{
       console.log("resposne datais",res);
       this.spinner1 =false;
           this.selectedIncident.supportRemark = res.supportRemark;   

@@ -29,6 +29,7 @@
                   </div>
                   <div class="col-5">
                     <h5 class="text-center text-muted "> Issue Type</h5>
+                  
               <select #sel class="custom-select custom-select-sm" (change)="filter(sel.value)" >
                     <option value="all">All</option>
                     <option value="Hardware">Hardware</option>
@@ -36,9 +37,10 @@
                     <option value="Other" >Other</option>
               
                 </select>
-                <a  href="http://192.168.1.43:8000/incidents/excel">
+                <a  href="http://192.168.1.43:8000/incidents/support/all/excel?access_token={{auth.getToken()}}">
                  <button class="btn btn-success">DownloadCSV</button> </a>
                     </div>
+                   
                 </div>
             
            
