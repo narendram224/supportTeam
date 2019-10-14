@@ -4,6 +4,152 @@
     left: 48%;
     top: 45%;
 }
+.header_main{
+	width: 100%;
+	display: inline-block;
+	background: #183159;
+	padding: 5px 0;
+	.header{
+		width: 100%;
+		display: inline-block;
+		.logo{
+			width: auto;
+			display: inline-block;
+			img{
+				max-width: 50px;
+			}
+		}
+		.issue_type_main{
+			float: right;
+			width: auto;
+			text-align: right;
+			padding-top: 10px;
+			.issue_select{
+				width: 420px;
+				display: inline-block;
+				vertical-align: top;
+				
+				span{
+					color: white;
+					margin-right: 10px;
+				}
+				select{
+					max-width: 300px;
+    				width: 100%;
+				}
+			}
+			.download{
+				display: inline-block;
+				margin-left: 20px;
+				vertical-align: top;
+				a{
+					background: gray;
+					color: white;
+					border-radius: 20px;
+					padding: 4px 16px;
+					display: inline-block;
+					text-decoration: none;
+					i{
+						padding-right: 10px; 
+					}
+				}
+			}
+		}
+	}
+}
+.dashboard_main {
+    width: 100%;
+    display: inline-block;
+	padding: 0 10px;
+	.title {
+		width: 100%;
+		display: inline-block;
+		text-align: center;
+		h2{
+			margin: 0;
+			padding: 10px 0;
+			font-size: 20px;
+			font-weight: 600;
+		}
+	}
+	table{
+		td{
+			font-size: 17px;
+    		text-transform: capitalize;
+		}
+		thead{
+			background: grey;
+			th {
+				font-weight: 500;
+				color: white;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .error-header {
 	background: #fff;
 	height: 180px;

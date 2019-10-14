@@ -1,129 +1,157 @@
-
-<div *ngIf = "spinner" class="spinner">
-  <app-self-building-square-spinner
-  [animationDuration]="1500"
-  [size]="65"
-  [color]="'linear-gradient(to right top, #051937, #20295f, #4a3686, #7e3ea7, #ba3dc0)'"
-></app-self-building-square-spinner>
+<div *ngIf="spinner" class="spinner">
+  <app-self-building-square-spinner [animationDuration]="1500" [size]="65"
+    [color]="'linear-gradient(to right top, #051937, #20295f, #4a3686, #7e3ea7, #ba3dc0)'">
+  </app-self-building-square-spinner>
 
 </div>
-<div *ngIf="!spinner && !incidences.length"><div class="error-header"> 
-</div> 
-<div class="container "> 
- <section class="error-container text-center"> 
-  <h1>404</h1> 
-  <div class="error-divider"> 
-   <h2>PAGE NOT FOUND.</h2> 
-   <p class="description">We Couldn't Find This Page</p> 
-  </div> 
- </section> 
-</div> </div>
-  <div class="row" *ngIf="!spinner && incidences.length">
-    <div class="col">
-        <div class="card m-2"  >
-            <div class="card-header text-center mb-1">
-                <p>INCIDENTS</p> 
-                <div class="row">
-                  <div class="col-4">
-                     
-                  </div>
-                  <div class="col-5">
-                    <h5 class="text-center text-muted "> Issue Type</h5>
-              <select #sel class="custom-select custom-select-sm" (change)="filter(sel.value)" >
-                    <option value="all">All</option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Software"  >Software</option>
-                    <option value="Other" >Other</option>
-              
-                </select>
-                <a  href="http://192.168.1.43:8000/incidents/excel">
-                 <button class="btn btn-success">DownloadCSV</button> </a>
-                    </div>
-                </div>
-            
-           
-            </div>
-            
-            <!-- <table class="table table-hover ">
-              <thead class="thead-dark">
-                <tr>
-                  <th>#</th>
-                  <th>Issue</th>
-                 
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let incidence of heroes">
-          
-                  <td>{{ incidence.name}}</td>
-                  <td> {{ incidence.franchise }}</td>
-                  
-                  <td>
-                    <button class="btn btn-primary" (click)="selectContact(incidence)" data-toggle="modal" data-target="#exampleModal"> Show details</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
-            <table class="table table-hover ">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Transporter Name</th>
-                    <th>Issue Type</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let incidence of incidences">
-                    <td> {{ incidence.transporterName }}</td>
-                    <td> {{ incidence.issueTypeStr }}</td>
-              
-                    <td>
-                      <button class="btn btn-primary" (click)="showDetail(incidence)" data-toggle="modal" data-target="#exampleModal"> Show details</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-    </div>
-
-    <div class="col-md-6" *ngIf="selectedIncident" >
-        <div class="card m-2">
-            <div class="card-body text-center">
-             Incident detail
-            </div>
-          </div>
-        
-          
-        <div class="card" *ngIf="selectedIncident" >
-            <div class="card-body">
-                <h5 class="card-title">Email :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.email}}</span></h5>
-              <h5 class="card-title">Incindent ID :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.incidentID}}</span></h5>
-              <h5 class="card-title">Contact no :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.contactNumber}}</span></h5>
-              <h5 class="card-title">User Name :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.username}}</span></h5>
-              <h5 class="card-title"> Vehicle Number :<span class="card-subtitle mb-2 pl-3 text-muted">{{selectedIncident.vehicleNumber}}</span></h5>
-              <h5 class="card-title">IssueType  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.issueTypeStr}}</span></h5>
-              <h5 class="card-title">Location  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.location}}</span></h5>
-              <h5 class="card-title">User Remark  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.remarks}}</span></h5>
-              <h5 class="card-title">Report Time  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.reportDateTimeStr}}</span></h5>
-              <h5 class="card-title">TransporterID  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.transporterID}}</span></h5>
-              <h5 class="card-title">Transporter Name  :<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.transporterName}}</span></h5>
-              <h5 *ngIf="selectedIncident.supportRemark" class="card-title">Support Remark:<span class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.supportRemark}}</span></h5>
-             <div *ngIf="!selectedIncident.supportRemark">
-               <!-- <form (ngSubmit)="f.form.valid && submitRemark(news)" #f="ngForm"> -->
-              <label for="exampleFormControlTextarea1">Enter Your Remark</label>
-             <textarea required class="form-control" id="exampleFormControlTextarea1" ngModel #news="ngModel" rows="3" placeholder="Enter your remark"  ></textarea>
-             <button [disabled]="news.invalid" type="submit" class="btn btn-primary mt-1" (click)="submitRemark(news)">{{spinner1?"Please wait...":"Submit"}}
-               <span *ngIf="spinner1" class="spinner-border spinner-border-sm"></span>
-             </button>   
-             <small *ngIf="news.touched && news.errors">This field is required</small>          
-            <small *ngIf="selectedIncident.supportRemark==null">Error : {{errorData}}</small>
-            <!-- </form> -->
-
-            </div>
-            </div>
-          </div>
-
+<div *ngIf="!spinner && !incidences.length">
+  <!-- <div class="error-header">
+  </div>
+  <div class="container ">
+    <section class="error-container text-center">
+      <h1>404</h1>
+      <div class="error-divider">
+        <h2>PAGE NOT FOUND.</h2>
+        <p class="description">We Couldn't Find This Page</p>
       </div>
+    </section>
+  </div>
+</div> -->
+  <div class="header_main">
+    <div class="container-fluid">
+      <div class="header">
+        <div class="logo">
+          <img src="assets/images/logo.png" alt="logo">
+        </div>
+        <div class="issue_type_main">
+          <div class="issue_select">
+            <span>
+              Issue Type
+            </span>
+            <select #sel class="custom-select custom-select-sm" (change)="filter(sel.value)">
+              <option value="all">All</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Software">Software</option>
+              <option value="Other">Other</option>
+
+            </select>
+          </div>
+          <div class="download">
+            <a href="http://192.168.1.43:8000/incidents/excel"><i class="fa fa-download"
+                aria-hidden="true"></i>DownloadCSV </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+
+  <div class="container-fluid">
+    <div class="dashboard_main">
+      <div class="row" *ngIf="!spinner && incidences.length">
+        <div class="col p-0">
+          <div class="title">
+            <h2>INCIDENTS</h2>
+          </div>
+
+          <!-- <table class="table table-hover ">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>#</th>
+                          <th>Issue</th>
+                         
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let incidence of heroes">
+                  
+                          <td>{{ incidence.name}}</td>
+                          <td> {{ incidence.franchise }}</td>
+                          
+                          <td>
+                            <button class="btn btn-primary" (click)="selectContact(incidence)" data-toggle="modal" data-target="#exampleModal"> Show details</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table> -->
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Transporter Name</th>
+                <th>Issue Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let incidence of incidences">
+                <td> {{ incidence.transporterName }}</td>
+                <td> {{ incidence.issueTypeStr }}</td>
+
+                <td>
+                  <button class="showbtn" (click)="showDetail(incidence)" data-toggle="modal"
+                    data-target="#exampleModal">
+                    Show details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="col-md-6" *ngIf="selectedIncident">
+          <div class="card m-2">
+            <div class="card-body text-center">
+              Incident detail
+            </div>
+          </div>
+
+
+          <div class="card" *ngIf="selectedIncident">
+            <div class="card-body">
+              <h5 class="card-title">Email :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.email}}</span></h5>
+              <h5 class="card-title">Incindent ID :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.incidentID}}</span></h5>
+              <h5 class="card-title">Contact no :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.contactNumber}}</span></h5>
+              <h5 class="card-title">User Name :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.username}}</span></h5>
+              <h5 class="card-title"> Vehicle Number :<span
+                  class="card-subtitle mb-2 pl-3 text-muted">{{selectedIncident.vehicleNumber}}</span></h5>
+              <h5 class="card-title">IssueType :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.issueTypeStr}}</span></h5>
+              <h5 class="card-title">Location :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.location}}</span></h5>
+              <h5 class="card-title">User Remark :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.remarks}}</span></h5>
+              <h5 class="card-title">Report Time :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.reportDateTimeStr}}</span></h5>
+              <h5 class="card-title">TransporterID :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.transporterID}}</span></h5>
+              <h5 class="card-title">Transporter Name :<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.transporterName}}</span></h5>
+              <h5 *ngIf="selectedIncident.supportRemark" class="card-title">Support Remark:<span
+                  class="card-subtitle mb-2 pl-3  text-muted">{{selectedIncident.supportRemark}}</span></h5>
+              <div *ngIf="!selectedIncident.supportRemark">
+                <!-- <form (ngSubmit)="f.form.valid && submitRemark(news)" #f="ngForm"> -->
+                <label for="exampleFormControlTextarea1">Enter Your Remark</label>
+                <textarea required class="form-control" id="exampleFormControlTextarea1" ngModel #news="ngModel"
+                  rows="3" placeholder="Enter your remark"></textarea>
+                <button [disabled]="news.invalid" type="submit" class="btn btn-primary mt-1"
+                  (click)="submitRemark(news)">{{spinner1?"Please wait...":"Submit"}}
+                  <span *ngIf="spinner1" class="spinner-border spinner-border-sm"></span>
+                </button>
+                <small *ngIf="news.touched && news.errors">This field is required</small>
+                <small *ngIf="selectedIncident.supportRemark==null">Error : {{errorData}}</small>
+                <!-- </form> -->
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
