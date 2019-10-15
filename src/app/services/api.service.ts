@@ -7,15 +7,35 @@ import { NgxSpinnerService } from "ngx-spinner";
 @Injectable({
   providedIn: 'root'
 })
-
 export class ApiService {
   url = "http://192.168.1.43:8000";
   header: HttpHeaders;
   constructor(private http: HttpClient) { }
+  getHeaders(optHeaders?: HttpHeaders) {
+    let headers = new HttpHeaders();
+    if (localStorage.getItem('LoggedInUser')) {
+      headers = headers.set(
+        'Authorization',
+        'bearer ' + localStorage.getItem('LoggedInUser')
+      );
+    } else {
+      headers = headers.set(
+        'Authorization',
+        'Basic ' + btoa('efkon-msil:nxtlife')
+      );
+    }
+    if (optHeaders) {
+      for (const optHeader of optHeaders.keys()) {
+        headers = headers.append(optHeader, optHeaders.get(optHeader));
+      }
+    }
+    return headers;
+  }
 
   get(endpoint: string, optHeaders?: HttpHeaders) {
+    const headers = this.getHeaders(optHeaders);
     return this.http
-      .get(this.url + "/" + endpoint, { headers: optHeaders, observe: "response" })
+      .get(this.url + "/" + endpoint, { headers: headers, observe: "response" })
       .pipe(
         map(this.extractData),
         catchError(this.handleError)
@@ -23,9 +43,10 @@ export class ApiService {
   }
 
   post(endpoint: string, body: any, optHeaders?: HttpHeaders) {
+    const headers = this.getHeaders(optHeaders);
     return this.http
       .post(this.url + "/" + endpoint, body, {
-
+        headers: headers,
         observe: "response"
       })
       .pipe(
@@ -35,9 +56,10 @@ export class ApiService {
   }
 
   put(endpoint: string, body: any, optHeaders?: HttpHeaders) {
+    const headers = this.getHeaders(optHeaders);
     return this.http
       .put(this.url + "/" + endpoint, body, {
-
+        headers: headers,
         observe: "response"
       })
       .pipe(
@@ -46,23 +68,24 @@ export class ApiService {
       );
   }
 
-  delete(endpoint: string, optHeaders?: HttpHeaders) {
-    return this.http
-      .delete(this.url + "/" + endpoint, {
-
-        observe: "response"
-      })
-      .pipe(
-        map(this.extractData),
-        catchError(this.handleError)
-      );
-  }
+  // delete(endpoint: string, optHeaders?: HttpHeaders) {
+  //   const headers = this.getHeaders(optHeaders);
+  //   return this.http
+  //     .delete(this.url + "/" + endpoint, {
+  //         headers:headers,
+  //       observe: "response"
+  //     })
+  //     .pipe(
+  //       map(this.extractData),
+  //       catchError(this.handleError)
+  //     );
+  // }
   // another method which will use for operations
   extractData = (response: HttpResponse<any>) => {
     if (response.status === 204) {
       // this.showalert("Data not Found");
       console.log("Data not found");
-      
+
     }
     return response.body || response.status;
   }
@@ -73,7 +96,8 @@ export class ApiService {
     if (errorResponse.status)
       // this.showalert(errorResponse.error.message || "Something went wrong");
       console.log(errorResponse.error.message || "Something went wrong");
-      
+    alert(errorResponse.error.message || "Something went wrong");
+
     return throwError(errorResponse);
 
     // if (errorResponse.error instanceof ErrorEvent) {
@@ -86,9 +110,9 @@ export class ApiService {
     // return throwError("server side problem ! No data found");
   }
   // alert method
-   showalert(message) {
-      console.log(message);
-      
+  showalert(message) {
+    console.log(message);
+
   }
 
   // showSpinner(){

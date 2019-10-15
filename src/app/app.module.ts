@@ -9,18 +9,21 @@ import { ApiService } from './services/api.service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { HttpClientModule } from '@angular/common/http';
 // import { NgxSpinnerModule } from "ngx-spinner";
-import {SelfBuildingSquareSpinnerModule,SemipolarSpinnerModule,SpringSpinnerModule} from 'angular-epic-spinners'
+import {SelfBuildingSquareSpinnerModule,SemipolarSpinnerModule,SpringSpinnerModule} from 'angular-epic-spinners';
+import { LoginComponent } from './component/login/login.component'
+import { AuthGuard } from './auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,
     AppRoutingModule,HttpClientModule,FormsModule,SelfBuildingSquareSpinnerModule,SemipolarSpinnerModule
     ,SpringSpinnerModule
   ],
-  providers: [ApiService,DashboardService],
+  providers: [ApiService,DashboardService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
