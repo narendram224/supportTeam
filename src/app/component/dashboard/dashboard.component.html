@@ -66,7 +66,8 @@
               <th class="trans">Transporter Name</th>
               <th class="no-wrape text-center">Issue Type</th>
               <th class="subject"> Incident Subject Line</th>
-              <th class="created" (click)="sortData()">Date/Time Incident Created<i class="fa" [ngClass]="toggle?'fa-arrow-up':'fa-arrow-down'" aria-hidden="true"></i></th>
+              <th class="created" (click)="sortData()">Date/Time Incident Created<i class="fa"
+                  [ngClass]="toggle?'fa-arrow-up':'fa-arrow-down'" aria-hidden="true"></i></th>
               <th class="text-center">Date/Time Incident Resolved</th>
               <th class="text-center time">Time Taken to Resolve Incident</th>
               <th class="user-remark">Incident Remark</th>
@@ -74,12 +75,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let incidence of incidences" (click)="showDetail($event,incidence)" [ngClass]="selectedItem==incidence?'active':''">
+            <tr *ngFor="let incidence of incidences" (click)="showDetail($event,incidence)"
+              [ngClass]="selectedItem==incidence?'active':''">
               <td> {{ incidence.transporterName }}</td>
               <td class="text-center"> {{ incidence.issueTypeStr }}</td>
-              <td>The placeholder text, 
+              <td>The placeholder text,
                 elit”, looks like Latin because in its youth, centuries ago,</td>
-              <td class="newtxt" >{{incidence.reportDateTimeStr | date:'medium'}}
+              <td class="newtxt">{{incidence.reportDateTimeStr | date:'medium'}}
               </td>
               <td>Sep 26, 2019, 8:46:08 PM</td>
               <td>{{calHour(incidence.reportDateTimeStr ,incidence.reportDateTimeStr)}} hour ago</td>
@@ -98,9 +100,6 @@
 
       <div class="col-md-4 pr-0" *ngIf="selectedIncident">
         <div class="details-table">
-          <!-- <div class="title">
-            <h2>INCIDENTS DETAILS</h2>
-          </div> -->
 
           <table class="table table-hover table-bordered">
             <thead>
