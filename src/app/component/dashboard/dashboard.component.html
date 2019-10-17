@@ -63,21 +63,30 @@
         <table class="table table-hover table-bordered">
           <thead>
             <tr>
-              <th>Transporter Name</th>
+              <th class="trans">Transporter Name</th>
               <th class="no-wrape text-center">Issue Type</th>
-              <th class="text-center">Actions</th>
+              <th class="user-remark">User Remark</th>
+              <th>Subject Line</th>
+              <th class="support">Support Remark</th>
+              <th class="created">Created At<i class="fa fa-arrow-down" aria-hidden="true"></i></th>
+              <!-- <th class="text-center">Actions</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let incidence of incidences" [ngClass]="selectedItem==incidence?'active':''">
               <td> {{ incidence.transporterName }}</td>
               <td class="text-center"> {{ incidence.issueTypeStr }}</td>
-
-              <td class="text-center">
+              <td>The placeholder text, beginning with the line “Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit”, looks like Latin because in its youth, centuries ago,</td>
+              <td> Latin scholar from Hampden-Sydney College</td>
+              <td>{{incidence.supportRemark}}</td>
+              <td class="newtxt" (click)="showDetail($event,incidence)">{{incidence.reportDateTimeStr | date:'medium'}}
+              </td>
+              <!-- <td class="text-center">
                 <button class="showbtn" (click)="showDetail($event,incidence)" data-toggle="modal"
                   data-target="#exampleModal">
                   Show details</button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -99,52 +108,21 @@
             </thead>
             <tbody>
               <tr>
-                <td class="detaile-title">Email </td>
-                <td>{{selectedIncident.email}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">Incindent ID</td>
-                <td>{{selectedIncident.incidentID}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">Contact no</td>
-                <td>{{selectedIncident.contactNumber}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">User Name</td>
-                <td>{{selectedIncident.username}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">Vehicle Number</td>
-                <td>{{selectedIncident.vehicleNumber}}</td>
-              </tr>
-              <tr>
                 <td class="detaile-title">IssueType</td>
                 <td>{{selectedIncident.issueTypeStr}}</td>
               </tr>
               <tr>
-                <td class="detaile-title">Location</td>
-                <td>{{selectedIncident.location}}</td>
-              </tr>
-              <tr>
                 <td class="detaile-title">User Remark</td>
-                <td>{{selectedIncident.remarks}}</td>
+                <td>The placeholder text, beginning with the line “Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit”, looks like Latin because in its youth, centuries ago,</td>
               </tr>
               <tr>
-                <td class="detaile-title">Report Time</td>
-                <td>{{selectedIncident.reportDateTimeStr}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">TransporterID</td>
-                <td>{{selectedIncident.transporterID}}</td>
-              </tr>
-              <tr>
-                <td class="detaile-title">Transporter Name</td>
-                <td>{{selectedIncident.transporterName}}</td>
+                <td class="detaile-title">Subject Line</td>
+                <td>Latin scholar from Hampden-Sydney College</td>
               </tr>
               <tr *ngIf="selectedIncident.supportRemark">
                 <td class="detaile-title">Support Remark:</td>
-                <td>{{selectedIncident.supportRemark}}</td>
+                <td>{{selectedIncident.supportRemark}}<i class="fa fa-pencil" aria-hidden="true"></i></td>
               </tr>
             </tbody>
 
