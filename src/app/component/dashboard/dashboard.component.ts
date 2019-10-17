@@ -19,9 +19,17 @@ export class DashboardComponent implements OnInit {
   incidences: Dashboard[] = [];
   token: string;
   selectedItem;
+   dt1 = new Date("Sep 26, 2019, 5:46:08 PM"); 
+  dt2 = new Date("Sep 26, 2019, 8:46:08 PM"); 
+  firstName= 'Guybrush';
+   toggle=false;
+
+  lastName= 'Threepwood';
 
   constructor(private dashboardApi: DashboardService, private auth: AuthService) { }
   ngOnInit() {
+   
+
     this.token = `bearer ${this.auth.getToken()}`;
     console.log(this.token);
 
@@ -29,11 +37,13 @@ export class DashboardComponent implements OnInit {
       console.log(Incidences);
 
       this.incidences = Incidences;
+      // console.log(this.diff_minutes(Incidences.reportDateTimeStr, this.dt2)); 
       this.newarr = this.incidences;
     });
     setTimeout(() => {
       this.spinner = false;
     }, 1500);
+    
   }
   public showDetail(event, contact) {
     this.selectedIncident = contact;
@@ -84,4 +94,49 @@ export class DashboardComponent implements OnInit {
     var url = window.URL.createObjectURL(blob);
     window.open(url);
   }
+  
+//  diff_minutes(dt2, dt1) 
+//  {
+  
+//   var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+//   diff /= (60*60);
+//   return Math.abs(Math.round(diff));
+  
+//  }
+
+ get fullName() {
+  return this.firstName + " " + this.lastName;
+};
+
+set fullName(name) {
+  var parts = name.split(" ");
+  this.firstName = parts[0];
+  this.lastName = parts[1];
+};
+calHour(d2,d1){
+  const date1 = new Date(d1);
+  const date2 = new Date("Sep 26, 2019, 8:46:08 PM");
+  var diff =Math.abs(Math.round((date2.getTime() - date1.getTime()) / (1000*60*60)));
+  return diff;
+}
+ sortData() {
+   console.log("runs");
+   this.toggle=!this.toggle;
+    if (this.toggle) {
+      console.log("ifruns");
+      return this.incidences.sort((a, b) => {
+        return <any>new Date(b.reportDateTimeStr) - <any>new Date(a.reportDateTimeStr);
+      
+        
+      });
+    }else{
+      console.log("esleruns");
+      return this.incidences.sort((b, a) => {
+        return <any>new Date(b.reportDateTimeStr) - <any>new Date(a.reportDateTimeStr);
+      });
+      ;
+     
+    }
+    
+}
 }
